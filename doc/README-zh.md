@@ -1,4 +1,5 @@
 # Lightings
+[中文文档](https://github.com/JayZangwill/lightings/blob/master/doc/README-zh.md) | [English](https://github.com/JayZangwill/lightings/blob/master/README.md)
 
 一个基于es6 `Promise`的轻量级ajax框架。
 

@@ -24,6 +24,9 @@
 			if(this.dataType === "xml" || this.dataType === "html") {
 				this.dataType = "";
 			}
+			if(typeof this.async!=="boolean"){
+				this.async=true;
+			}
 			//data格式化
 			if(this.data && this.data.toString() === "[object Object]") {
 				let temp = [];

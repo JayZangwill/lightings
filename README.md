@@ -1,11 +1,11 @@
 # Lightings
 
-一个基于es6 `Promise`的轻量级ajax框架。
+A lightweight Ajax framework based on ES6 `Promise`.
 
-## 快速使用
+## Fast use
 
-1. 安装： `npm install lightings`
-2. 配置：
+1. install： `npm install lightings`
+2. configure：
 
 ```javascript
 	Lightings({
@@ -16,43 +16,43 @@
 	})
 ```
 
-## 目录结构：
+## Directory structure：
 
 	lightings
 		|---src
-		|    |---lightings.js (es6源码)
+		|    |---lightings.js (es6 source)
 		|
 		|---dist
-	     	|---lightings.js (使用bable编译后的源码es5)
+	     	|---lightings.js (use bable compiler source code es5)
 		 	|---lightings.min.js
 		 
-**tip：**如果您的浏览器支持es6语法可以直接用src目录里的es6源码。
+**tip：**If your browser supports ES6 syntax can be directly used in the **src** directory of the ES6 source code.
 
-## 配置参数
+## Configuration parameter
 
 <table>
 	<tr>
-		<th>参数</th>
-		<th>说明</th>
-		<th>默认值</th>
-		<th>可能值</th>
-		<th>备注</th>
+		<th>parameter</th>
+		<th>explain</th>
+		<th>default value</th>
+		<th>possible value</th>
+		<th>remarks</th>
 	</tr>
 	<tr>
 		<td>
 			url
 		</td>
 		<td>
-			请求数据的地址
+			requested data address
 		</td>
 		<td>
 			undefined
 		</td>
 		<td>
-			由用户定义
+			user define
 		</td>
 		<td>
-			必须
+			must
 		</td>
 	</tr>
 	<tr>
@@ -60,16 +60,16 @@
 			success
 		</td>
 		<td>
-			请求数据成功后调用的函数
+			a function called after the request data is successful
 		</td>
 		<td>
 			undefined
 		</td>
 		<td>
-			由用户定义
+			user define
 		</td>
 		<td>
-			必须
+			must
 		</td>
 	</tr>
 	<tr>
@@ -77,16 +77,16 @@
 			error
 		</td>
 		<td>
-			请求数据失败后调用的函数
+			A function called after the request data failed
 		</td>
 		<td>
 			undefined
 		</td>
 		<td>
-			由用户定义
+			user define
 		</td>
 		<td>
-			视用户的情况而定
+			depending on the user's situation
 		</td>
 	</tr>
 	<tr>
@@ -94,16 +94,16 @@
 			data
 		</td>
 		<td>
-			连同请求一起发送到后台的数据
+			data sent to server
 		</td>
 		<td>
 			undefined
 		</td>
 		<td>
-			由用户定义
+			user define
 		</td>
 		<td>
-			非必须
+			must not
 		</td>
 	</tr>
 	<tr>
@@ -111,7 +111,7 @@
 			dataType
 		</td>
 		<td>
-			数据返回的格式
+			data return format
 		</td>
 		<td>
 			json
@@ -120,7 +120,7 @@
 			json | jsonp | html | xml | text
 		</td>
 		<td>
-			非必须
+			must not
 		</td>
 	</tr>
 	<tr>
@@ -128,16 +128,16 @@
 			contentType
 		</td>
 		<td>
-			请求头
+			request header
 		</td>
 		<td>
 			"application/x-www-form-urlencoded"
 		</td>
 		<td>
-			"application/x-www-form-urlencoded" | 用户定义
+			"application/x-www-form-urlencoded" | user define
 		</td>
 		<td>
-			非必须
+			must not
 		</td>
 	</tr>
 	<tr>
@@ -145,7 +145,7 @@
 			async
 		</td>
 		<td>
-			是否异步请求
+			asynchronous request
 		</td>
 		<td>
 			true
@@ -154,7 +154,7 @@
 			true | false
 		</td>
 		<td>
-			非必须
+			must not
 		</td>
 	</tr>
 	<tr>
@@ -162,18 +162,18 @@
 			callbackName
 		</td>
 		<td>
-			设置dataType为jsonp时，服务端返回的回调函数名
+			when dataType is set to jsonp, the callback function name returned by the server
 		</td>
 		<td>
 			callback
 		</td>
 		<td>
-			callback | 用户定义
+			callback | user define
 		</td>
 		<td>
-			dataTpye为jsonp时且服务端返回的回调函数名不为callback时必须
+			when dataTpye is jsonp and the callback function name returned by the server is not callback
 		</td>
 	</tr>
 </table>
 
-**tip：**如果设置了`dataType`为`jsonp`的话只支持`get`请求
+**tip：**If the `dataType` is set to `jsonp`, only support the `get` request.

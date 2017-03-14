@@ -1,5 +1,5 @@
 # Lightings
-
+(https://github.com/JayZangwill/lightings/blob/master/doc/README-zh.md)[中文文档] | (https://github.com/JayZangwill/lightings/blob/master/README.md)[English]
 A lightweight Ajax framework based on ES6 `Promise`.
 
 ## Fast use

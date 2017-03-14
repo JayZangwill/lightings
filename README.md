@@ -7,12 +7,14 @@
 1. 安装： `npm install lightings`
 2. 配置：
 
+```javascript
 	Lightings({
-		url: "http//:www.expmple",
-		success: function(data) {
+		url:"http://www.example.com",
+		success:function(data){
 			console.log(data);
 		}
 	})
+```
 
 ## 目录结构：
 

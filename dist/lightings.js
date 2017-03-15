@@ -1,5 +1,8 @@
 "use strict";
 
+/*
+ * 2017 by Jay Zangwill
+ */
 (function () {
 	'use strict';
 
@@ -14,6 +17,7 @@
 			this.url = options.url;
 			this.success = options.success;
 			this.error = options.error;
+			this.timeout = options.timeout || 0;
 			this.type = options.type || "get";
 			//this.flag用于判断返回值
 			this.flag = this.dataType = options.dataType.toLowerCase() || "json";
@@ -44,7 +48,8 @@
 			//jsonp
 			if (this.dataType === "jsonp") {
 				var script = document.createElement("script"),
-				    random = "" + Math.random() + Math.random();
+				    random = "" + Math.random() + Math.random(),
+				    time = void 0;
 				random = random.replace(/0\./g, "_");
 				script.src = this.data ? this.url + "?" + this.callbackName + "=Lightings" + random + "&" + this.data : this.url + "?" + this.callbackName + "=Lightings" + random;
 				document.body.appendChild(script);
@@ -58,25 +63,17 @@
 			//调用get请求
 			if (this.type === "get") {
 				this.get().then(function (data) {
-					if (_this.success && typeof _this.success === "function") {
-						_this.success.call(_this, data);
-					}
+					_this.success && _this.success.call(_this, data);
 				}).catch(function (err) {
-					if (_this.error && typeof _this.error === "function") {
-						_this.error.call(_this, err);
-					}
+					_this.error && _this.error.call(_this, err);
 				});
 			}
 			//调用post请求
 			if (this.type === "post") {
 				this.post().then(function (data) {
-					if (_this.success && typeof _this.success === "function") {
-						_this.success.call(_this, data);
-					}
+					_this.success && _this.success.call(_this, data);
 				}).catch(function (err) {
-					if (_this.error && typeof _this.error === "function") {
-						_this.error.call(_this, err);
-					}
+					_this.error && _this.error.call(_this, err);
 				});
 			}
 			return this;
@@ -92,6 +89,7 @@
 		}
 	};
 	Lightings.prototype.init.prototype = Lightings.prototype;
+
 	function _promise(method, context) {
 		return new Promise(function (reslove, reject) {
 			context.xhr.responseType = context.dataType;
@@ -118,6 +116,9 @@
 					}
 				}
 			};
+			//设置超时
+			context.xhr.timeout = context.timeout;
+			context.xhr.ontimeout = context.error;
 		});
 	}
 	window.Lightings = Lightings;

@@ -175,6 +175,29 @@
 			dataTpye为jsonp时且服务端返回的回调函数名不为callback时必须
 		</td>
 	</tr>
+	<tr>
+		<td>
+			timeout
+		</td>
+		<td>
+			设置ajax的超时时长
+		</td>
+		<td>
+			0
+		</td>
+		<td>
+			 用户定义
+		</td>
+		<td>
+			jsonp暂时不支持timeout
+		</td>
+	</tr>
 </table>
 
 **tip：**如果设置了`dataType`为`jsonp`的话只支持`get`请求
+
+## 更新日志
+
+### 2017 3.15 v1.1.0
+
+添加`timeout`配置项。(jsonp暂不支持timeout)

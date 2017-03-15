@@ -175,6 +175,29 @@ A lightweight Ajax framework based on ES6 `Promise`.
 			when dataTpye is jsonp and the callback function name returned by the server is not callback
 		</td>
 	</tr>
+	<tr>
+		<td>
+			timeout
+		</td>
+		<td>
+			set ajax timeout duration
+		</td>
+		<td>
+			0
+		</td>
+		<td>
+			 user define
+		</td>
+		<td>
+			jsonp temporarily does not support timeout
+		</td>
+	</tr>
 </table>
 
 **tip：**If the `dataType` is set to `jsonp`, only support the `get` request.
+
+## Update log
+
+### 2017 3.15 v1.1.0
+
+Add `timeout` configuration item. (jsonp does not support timeout)

@@ -1,3 +1,6 @@
+/*
+ * 2017 by Jay Zangwill
+ */
 (function() {
 	'use strict';
 
@@ -6,10 +9,11 @@
 	}
 	Lightings.prototype = {
 		constructor: Lightings,
-		init:function(options) {
+		init: function(options) {
 			this.url = options.url;
 			this.success = options.success;
 			this.error = options.error;
+			this.timeout = options.timeout || 0;
 			this.type = options.type || "get";
 			//this.flag用于判断返回值
 			this.flag = this.dataType = options.dataType.toLowerCase() || "json";
@@ -24,8 +28,8 @@
 			if(this.dataType === "xml" || this.dataType === "html") {
 				this.dataType = "";
 			}
-			if(typeof this.async!=="boolean"){
-				this.async=true;
+			if(typeof this.async !== "boolean") {
+				this.async = true;
 			}
 			//data格式化
 			if(this.data && this.data.toString() === "[object Object]") {
@@ -40,7 +44,8 @@
 			//jsonp
 			if(this.dataType === "jsonp") {
 				let script = document.createElement("script"),
-					random = "" + Math.random() + Math.random();
+					random = "" + Math.random() + Math.random(),
+					time;
 				random = random.replace(/0\./g, "_");
 				script.src = this.data ?
 					`${this.url}?${this.callbackName}=Lightings${random}&${this.data}` :
@@ -56,39 +61,32 @@
 			//调用get请求
 			if(this.type === "get") {
 				this.get().then((data) => {
-					if(this.success && typeof this.success === "function") {
-						this.success.call(this, data);
-					}
+					this.success && this.success.call(this, data);
 				}).catch((err) => {
-					if(this.error && typeof this.error === "function") {
-						this.error.call(this, err);
-					}
+					this.error && this.error.call(this, err);
 				});
 			}
 			//调用post请求
 			if(this.type === "post") {
 				this.post().then((data) => {
-					if(this.success && typeof this.success === "function") {
-						this.success.call(this, data);
-					}
+					this.success && this.success.call(this, data);
 				}).catch((err) => {
-					if(this.error && typeof this.error === "function") {
-						this.error.call(this, err);
-					}
+					this.error && this.error.call(this, err);
 				});
 			}
 			return this;
 		},
 		//get请求
-		get(){
+		get() {
 			return _promise("get", this);
 		},
 		//post请求
-		post(){
+		post() {
 			return _promise("post", this);
 		}
 	}
-	Lightings.prototype.init.prototype=Lightings.prototype;
+	Lightings.prototype.init.prototype = Lightings.prototype;
+
 	function _promise(method, context) {
 		return new Promise((reslove, reject) => {
 			context.xhr.responseType = context.dataType;
@@ -115,6 +113,9 @@
 					}
 				}
 			}
+			//设置超时
+			context.xhr.timeout = context.timeout;
+			context.xhr.ontimeout = context.error;
 		});
 	}
 	window.Lightings = Lightings;

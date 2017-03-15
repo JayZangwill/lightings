@@ -27,7 +27,7 @@ A lightweight Ajax framework based on ES6 `Promise`.
 	     	|---lightings.js (use bable compiler source code es5)
 		 	|---lightings.min.js
 		 
-**tip：**If your browser supports ES6 syntax can be directly used in the **src** directory of the ES6 source code.
+**tip**If your browser supports ES6 syntax can be directly used in the **src** directory of the ES6 source code.
 
 ## Configuration parameter
 
@@ -194,7 +194,7 @@ A lightweight Ajax framework based on ES6 `Promise`.
 	</tr>
 </table>
 
-**tip：**If the `dataType` is set to `jsonp`, only support the `get` request.
+**tip**If the `dataType` is set to `jsonp`, only support the `get` request.
 
 ## Update log
 

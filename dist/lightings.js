@@ -17,6 +17,8 @@
 			this.url = options.url;
 			this.success = options.success;
 			this.error = options.error;
+			this.start = options.start;
+			this.progress = options.progress;
 			this.timeout = options.timeout || 0;
 			this.type = options.type || "get";
 			//this.flag用于判断返回值
@@ -116,9 +118,14 @@
 					}
 				}
 			};
-			//设置超时
 			context.xhr.timeout = context.timeout;
 			context.xhr.ontimeout = context.error;
+			context.xhr.onloadstart = function (e) {
+				context.start && context.start.call(this, e);
+			};
+			context.xhr.onprogress = function (e) {
+				context.progress && context.progress.call(this, e);
+			};
 		});
 	}
 	window.Lightings = Lightings;

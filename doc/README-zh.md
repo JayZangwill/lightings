@@ -27,7 +27,7 @@
 	     	|---lightings.js (使用bable编译后的源码es5)
 		 	|---lightings.min.js
 		 
-**tip：**如果您的浏览器支持es6语法可以直接用src目录里的es6源码。
+**tip**如果您的浏览器支持es6语法可以直接用src目录里的es6源码。
 
 ## 配置参数
 
@@ -228,7 +228,7 @@
 	</tr>
 </table>
 
-**tip：**如果设置了`dataType`为`jsonp`的话只支持`get`请求
+**tip**如果设置了`dataType`为`jsonp`的话只支持`get`请求
 
 ## 更新日志
 

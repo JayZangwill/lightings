@@ -192,6 +192,40 @@
 			jsonp暂时不支持timeout
 		</td>
 	</tr>
+	<tr>
+		<td>
+			start
+		</td>
+		<td>
+			设置ajax请求发送前的回调函数，相当于`onloadstart`
+		</td>
+		<td>
+			undefined
+		</td>
+		<td>
+			 用户定义
+		</td>
+		<td>
+			jsonp暂时不支持start
+		</td>
+	</tr>
+	<tr>
+		<td>
+			progress
+		</td>
+		<td>
+			设置ajax请求发中的回调函数，相当于`onprogress`
+		</td>
+		<td>
+			undefined
+		</td>
+		<td>
+			 用户定义
+		</td>
+		<td>
+			jsonp暂时不支持progress，且ie10一下浏览器不能用
+		</td>
+	</tr>
 </table>
 
 **tip：**如果设置了`dataType`为`jsonp`的话只支持`get`请求
@@ -200,4 +234,6 @@
 
 ### 2017 3.15 v1.1.0
 
-添加`timeout`配置项。(jsonp暂不支持timeout)
+1. 添加`timeout`配置项。(jsonp暂不支持timeout)
+2. 添加`start`配置项。(jsonp暂不支持timeout)
+3. 添加`progress`配置项。(jsonp暂不支持timeout)

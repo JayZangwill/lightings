@@ -192,6 +192,57 @@ A lightweight Ajax framework based on ES6 `Promise`.
 			jsonp temporarily does not support timeout
 		</td>
 	</tr>
+	<tr>
+		<td>
+			timeout
+		</td>
+		<td>
+			set ajax timeout duration
+		</td>
+		<td>
+			undefined
+		</td>
+		<td>
+			 user define
+		</td>
+		<td>
+			jsonp temporarily does not support timeout
+		</td>
+	</tr>
+	<tr>
+		<td>
+			start
+		</td>
+		<td>
+			set the callback function before the Ajax request is sent, equivalent to `onloadstart`
+		</td>
+		<td>
+			undefined
+		</td>
+		<td>
+			 user define
+		</td>
+		<td>
+			jsonp temporarily does not support start
+		</td>
+	</tr>
+	<tr>
+		<td>
+			progress
+		</td>
+		<td>
+			equivalent to `onprogress`
+		</td>
+		<td>
+			undefined
+		</td>
+		<td>
+			 user define
+		</td>
+		<td>
+			jsonp temporarily does not support progress and ie10 browser can not be used
+		</td>
+	</tr>
 </table>
 
 **tip**If the `dataType` is set to `jsonp`, only support the `get` request.
@@ -201,3 +252,5 @@ A lightweight Ajax framework based on ES6 `Promise`.
 ### 2017 3.15 v1.1.0
 
 Add `timeout` configuration item. (jsonp does not support timeout)
+Add `start` configuration item. (jsonp does not support timeout)
+Add `progress` configuration item. (jsonp does not support timeout)

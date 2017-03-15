@@ -251,6 +251,6 @@ A lightweight Ajax framework based on ES6 `Promise`.
 
 ### 2017 3.15 v1.1.0
 
-Add `timeout` configuration item. (jsonp does not support timeout)
-Add `start` configuration item. (jsonp does not support timeout)
-Add `progress` configuration item. (jsonp does not support timeout)
+1. Add `timeout` configuration item. (jsonp does not support timeout)
+2. Add `start` configuration item. (jsonp does not support timeout)
+3. Add `progress` configuration item. (jsonp does not support timeout)

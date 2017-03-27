@@ -11,6 +11,10 @@
 ```javascript
 	Lightings({
 		url:"http://www.example.com",
+		data:{
+			name:Jay Zangwill,
+			sex: man
+		},
 		success:function(data){
 			console.log(data);
 		}

@@ -114,6 +114,23 @@ A lightweight Ajax framework based on ES6 `Promise`.
 	</tr>
 	<tr>
 		<td>
+			type
+		</td>
+		<td>
+			request type
+		</td>
+		<td>
+			get
+		</td>
+		<td>
+			get/post
+		</td>
+		<td>
+			must not
+		</td>
+	</tr>
+	<tr>
+		<td>
 			dataType
 		</td>
 		<td>

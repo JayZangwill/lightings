@@ -114,6 +114,23 @@
 	</tr>
 	<tr>
 		<td>
+			type
+		</td>
+		<td>
+			请求的类型
+		</td>
+		<td>
+			get
+		</td>
+		<td>
+			get/post
+		</td>
+		<td>
+			非必须
+		</td>
+	</tr>
+	<tr>
+		<td>
 			dataType
 		</td>
 		<td>

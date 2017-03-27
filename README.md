@@ -22,6 +22,7 @@ A lightweight Ajax framework based on ES6 `Promise`.
 	lightings
 		|---src
 		|    |---lightings.js (es6 source)
+		|    |---promise.js (low browser support Promise)
 		|
 		|---dist
 	     	|---lightings.js (use bable compiler source code es5)
@@ -101,7 +102,7 @@ A lightweight Ajax framework based on ES6 `Promise`.
 			undefined
 		</td>
 		<td>
-			user define
+			user define(objects can be passed, such as: {dataKey:data})
 		</td>
 		<td>
 			must not
@@ -254,3 +255,7 @@ A lightweight Ajax framework based on ES6 `Promise`.
 1. Add `timeout` configuration item. (jsonp does not support timeout)
 2. Add `start` configuration item. (jsonp does not support timeout)
 3. Add `progress` configuration item. (jsonp does not support timeout)
+
+### 2017 3.27 v1.2.0
+
+Fixed low browser `Promise` function

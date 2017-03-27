@@ -22,6 +22,7 @@
 	lightings
 		|---src
 		|    |---lightings.js (es6源码)
+		|    |---promise.js (低版本浏览器支持Promise)
 		|
 		|---dist
 	     	|---lightings.js (使用bable编译后的源码es5)
@@ -101,7 +102,7 @@
 			undefined
 		</td>
 		<td>
-			由用户定义
+			由用户定义(可以传对象，例如:{dataKey:data})
 		</td>
 		<td>
 			非必须
@@ -237,3 +238,7 @@
 1. 添加`timeout`配置项。(jsonp暂不支持timeout)
 2. 添加`start`配置项。(jsonp暂不支持timeout)
 3. 添加`progress`配置项。(jsonp暂不支持timeout)
+
+### 2017 3.27 v1.2.0
+
+修正低版本浏览器`Promise`函数

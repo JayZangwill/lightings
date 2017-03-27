@@ -25,7 +25,7 @@ A lightweight Ajax framework based on ES6 `Promise`.
 		|    |---promise.js (low browser support Promise)
 		|
 		|---dist
-	     	|---lightings.js (use bable compiler source code es5)
+	     	        |---lightings.js (use bable compiler source code es5)
 		 	|---lightings.min.js
 		 
 **tip**If your browser supports ES6 syntax can be directly used in the **src** directory of the ES6 source code.

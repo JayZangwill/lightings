@@ -25,7 +25,7 @@
 		|    |---promise.js (低版本浏览器支持Promise)
 		|
 		|---dist
-	     	|---lightings.js (使用bable编译后的源码es5)
+	     	        |---lightings.js (使用bable编译后的源码es5)
 		 	|---lightings.min.js
 		 
 **tip**如果您的浏览器支持es6语法可以直接用src目录里的es6源码。

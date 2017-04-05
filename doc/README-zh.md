@@ -1,22 +1,86 @@
 # Lightings
 [中文文档](https://github.com/JayZangwill/lightings/blob/master/doc/README-zh.md) | [English](https://github.com/JayZangwill/lightings/blob/master/README.md)
 
-一个基于es6 `Promise`的轻量级ajax框架。
+一个基于es6 `Promise`的轻量级ajax框架支持模板渲染。
 
-## 快速使用
+## 使用指南
 
 1. 安装： `npm install lightings`
-2. 配置：
+2. 使用案例(tip:以下案例数据统一使用test.json文件的)：
 
-```javascript
+```
+	//test.json
+	{
+		'name': 'Lightings',
+		'author': {
+				'firstName': 'Jay',
+				'lastName': 'Zangwill'
+		}
+	}
+```
+
+```
+	// get
 	Lightings({
-		url:"http://www.example.com",
+		#el:"#app",
+		url:"test.json",
+		success:function(data){
+			//other operations
+		}
+	})
+```
+
+```
+	<!-- html -->
+	<div id="app">
+		<p>{{name}}</p>
+		<p>{{author.firstName}} {{author.lastName}}</p>
+	</div>
+```
+
+```
+	// get
+	Lightings({
+		url:"test.json",
+		success:function(data){
+			//dom operations
+		}
+	})
+```
+
+```
+	// post
+	Lightings({
+		#el:"#app",
+		url:"test.json",
+		type:"post",
 		data:{
-			name:Jay Zangwill,
-			sex: man
+			name:"Lightings"
 		},
 		success:function(data){
-			console.log(data);
+			//other operations
+		}
+	})
+```
+
+```
+	<!-- html -->
+	<div id="app">
+		<p>{{name}}</p>
+		<p>{{author.firstName}} {{author.lastName}}</p>
+	</div>
+```
+
+```
+	/jsonp
+	Lightings({
+		url:"test.json",
+		data:{
+			name:"Lightings"
+		},
+		dataType:"jsonp",
+		success:function(data){
+			//dom operations
 		}
 	})
 ```
@@ -43,6 +107,23 @@
 		<th>默认值</th>
 		<th>可能值</th>
 		<th>备注</th>
+	</tr>
+	<tr>
+		<td>
+			el
+		</td>
+		<td>
+			作为Lightings的挂载目标
+		</td>
+		<td>
+			undefined
+		</td>
+		<td>
+			由用户定义
+		</td>
+		<td>
+			jsonp暂不支持模板输出
+		</td>
 	</tr>
 	<tr>
 		<td>
@@ -154,10 +235,10 @@
 			请求头
 		</td>
 		<td>
-			"application/x-www-form-urlencoded"
+			"application/x-www-form-urlencoded; charset=UTF-8"
 		</td>
 		<td>
-			"application/x-www-form-urlencoded" | 用户定义
+			"application/x-www-form-urlencoded; charset=UTF-8" | 用户定义
 		</td>
 		<td>
 			非必须
@@ -263,3 +344,8 @@
 ### 2017 3.27 v1.2.0
 
 修正低版本浏览器`Promise`函数
+
+### 2017 4.5 v1.3.0
+
+1. 修正在ie9下报错bug
+2. 支持模板渲染(jsonp暂不支持)

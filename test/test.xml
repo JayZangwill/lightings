@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+	<name>
+		张三
+		<age>15</age>
+		<sex>男</sex>
+	</name>
+	<name>
+		李四
+		<age>18</age>
+		<sex>女</sex>
+	</name>
+</root>

@@ -1,11 +1,10 @@
-"use strict";
-
-/*
+/*!
+ * Lightings v1.3.0
  * 2017 by Jay Zangwill
  */
-(function () {
-	'use strict';
+'use strict';
 
+(function () {
 	function Lightings(options) {
 		return new Lightings.prototype.init(options);
 	}
@@ -14,6 +13,7 @@
 		init: function init(options) {
 			var _this = this;
 
+			this.el = options.el;
 			this.url = options.url;
 			this.success = options.success;
 			this.error = options.error;
@@ -22,14 +22,15 @@
 			this.timeout = options.timeout || 0;
 			this.type = options.type || "get";
 			//this.flag用于判断返回值
-			this.flag = this.dataType = options.dataType.toLowerCase() || "json";
-			this.contentType = options.contentType || "application/x-www-form-urlencoded";
+			this.flag = this.dataType = options.dataType || "json";
+			this.contentType = options.contentType || "application/x-www-form-urlencoded; charset=UTF-8";
 			this.data = options.data || null;
 			this.callbackName = options.callbackName || "callback";
 			this.async = options.async || true;
 			this.xhr = new XMLHttpRequest();
+			this.isIe9 = navigator.userAgent.indexOf("MSIE 9.0") > 0;
 			if (!this.url) {
-				throw Error("url is undefined");
+				throw Error("url is not defined");
 			}
 			if (this.dataType === "xml" || this.dataType === "html") {
 				this.dataType = "";
@@ -65,6 +66,7 @@
 			//调用get请求
 			if (this.type === "get") {
 				this.get().then(function (data) {
+					_echo(data, _this);
 					_this.success && _this.success.call(_this, data);
 				}).catch(function (err) {
 					_this.error && _this.error.call(_this, err);
@@ -73,6 +75,7 @@
 			//调用post请求
 			if (this.type === "post") {
 				this.post().then(function (data) {
+					_echo(data, _this);
 					_this.success && _this.success.call(_this, data);
 				}).catch(function (err) {
 					_this.error && _this.error.call(_this, err);
@@ -93,8 +96,10 @@
 	Lightings.prototype.init.prototype = Lightings.prototype;
 
 	function _promise(method, context) {
-		return new Promise(function (reslove, reject) {
-			context.xhr.responseType = context.dataType;
+		var timer = void 0;
+
+		return new Promise(function (resolve, reject) {
+			context.xhr.responseType = context.dataType.toLowerCase();
 			if (method === "get") {
 				//如果是get请求，如果有数据，则吧数据添加在连接上发送到服务端
 				var url = context.url;
@@ -112,14 +117,21 @@
 			context.xhr.onreadystatechange = function () {
 				if (this.readyState === 4) {
 					if (this.status >= 200 && this.status < 300 || this.status === 304) {
-						this.flag === "xml" ? reslove(this.responseXML) : reslove(this.response);
+						context.flag === "xml" ? resolve(this.responseXML) : context.isIe9 ? resolve(JSON.parse(this.responseText)) : resolve(this.response);
+						if (timer) {
+							clearTimeout(timer);
+						}
 					} else {
 						reject(this.status, this.statusText);
 					}
 				}
 			};
-			context.xhr.timeout = context.timeout;
-			context.xhr.ontimeout = context.error;
+			if (context.async && context.timeout > 0) {
+				timer = setTimeout(function () {
+					context.xhr.abort();
+					reject("timeout");
+				}, context.timeout);
+			}
 			context.xhr.onloadstart = function (e) {
 				context.start && context.start.call(this, e);
 			};
@@ -127,6 +139,45 @@
 				context.progress && context.progress.call(this, e);
 			};
 		});
+	}
+
+	// 模板渲染
+	function _echo(data, context) {
+		if (context.el) {
+			(function () {
+				var dom = document.querySelectorAll(context.el)[0],
+				    content = dom.innerHTML,
+				    key = void 0,
+				    variable = data,
+				    result = void 0,
+				    first = true,
+				    brace = /{{(.+?)}}/g;
+				if (typeof dom === "undefined") {
+					throw Error("Cannot find element: " + context.el);
+				}
+				if (dom.nodeName.toLowerCase() === "body" || dom.nodeName.toLowerCase() === "html") {
+					throw Error("Do not mount Lightings to <html> or <body> - mount to normal elements instead.");
+				}
+				while (brace.exec(content)) {
+					variable = data;
+					key = RegExp.$1.split(".");
+					key.forEach(function (item) {
+						variable = variable[item];
+					});
+
+					// 让模板能正确解析
+					if (first) {
+						result = content.replace(/{{.+?}}/, variable);
+						first = false;
+					} else {
+						result = result.replace(/{{.+?}}/, variable);
+					}
+				}
+				if (result) {
+					dom.innerHTML = result;
+				}
+			})();
+		}
 	}
 	window.Lightings = Lightings;
 })();

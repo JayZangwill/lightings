@@ -1,22 +1,86 @@
 # Lightings
 [中文文档](https://github.com/JayZangwill/lightings/blob/master/doc/README-zh.md) | [English](https://github.com/JayZangwill/lightings/blob/master/README.md)
 
-A lightweight Ajax framework based on ES6 `Promise`.
+A lightweight Ajax framework based on ES6 `Promise` support template rendering.
 
 ## Fast use
 
 1. install： `npm install lightings`
-2. configure：
+2. use guide：
 
-```javascript
+```
+	//test.json
+	{
+		'name': 'Lightings',
+		'author': {
+				'firstName': 'Jay',
+				'lastName': 'Zangwill'
+		}
+	}
+```
+
+```
+	// get
 	Lightings({
-		url:"http://www.example.com",
+		#el:"#app",
+		url:"test.json",
+		success:function(data){
+			//other operations
+		}
+	})
+```
+
+```
+	<!-- html -->
+	<div id="app">
+		<p>{{name}}</p>
+		<p>{{author.firstName}} {{author.lastName}}</p>
+	</div>
+```
+
+```
+	// get
+	Lightings({
+		url:"test.json",
+		success:function(data){
+			//dom operations
+		}
+	})
+```
+
+```
+	// post
+	Lightings({
+		#el:"#app",
+		url:"test.json",
+		type:"post",
 		data:{
-			name:Jay Zangwill,
-			sex: man
+			name:"Lightings"
 		},
 		success:function(data){
-			console.log(data);
+			//other operations
+		}
+	})
+```
+
+```
+	<!-- html -->
+	<div id="app">
+		<p>{{name}}</p>
+		<p>{{author.firstName}} {{author.lastName}}</p>
+	</div>
+```
+
+```
+	/jsonp
+	Lightings({
+		url:"test.json",
+		data:{
+			name:"Lightings"
+		},
+		dataType:"jsonp",
+		success:function(data){
+			//dom operations
 		}
 	})
 ```
@@ -43,6 +107,23 @@ A lightweight Ajax framework based on ES6 `Promise`.
 		<th>default value</th>
 		<th>possible value</th>
 		<th>remarks</th>
+	</tr>
+	<tr>
+		<td>
+			el
+		</td>
+		<td>
+			As Lightings mount target
+		</td>
+		<td>
+			undefined
+		</td>
+		<td>
+			user define
+		</td>
+		<td>
+			jsonp does not support template output
+		</td>
 	</tr>
 	<tr>
 		<td>
@@ -154,10 +235,10 @@ A lightweight Ajax framework based on ES6 `Promise`.
 			request header
 		</td>
 		<td>
-			"application/x-www-form-urlencoded"
+			"application/x-www-form-urlencoded; charset=UTF-8"
 		</td>
 		<td>
-			"application/x-www-form-urlencoded" | user define
+			"application/x-www-form-urlencoded; charset=UTF-8" | user define
 		</td>
 		<td>
 			must not
@@ -280,3 +361,8 @@ A lightweight Ajax framework based on ES6 `Promise`.
 ### 2017 3.27 v1.2.0
 
 Fixed low browser `Promise` function
+
+### 2017 4.5 v1.3.0
+
+1. Fixed a bug in IE9 under bug
+2. Support template rendering(jsonp does not support)

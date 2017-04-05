@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+	</head>
+
+	<body>
+		<div id="app">
+			<p>大</p>
+		</div>
+		<!--<script src="../dist/lightings.min.js"></script>-->
+		<script src="../dist/lightings.js"></script>
+		<script>
+			var a = Lightings({
+//								url: "http://s.weibo.com/ajax/jsonp/suggestion",
+				url: "test.json",
+//								data: "key=刘国梁",
+//								callbackName: "_cb",
+				success: function(data) {
+					console.log(data);
+				}
+			});
+		</script>
+	</body>
+
+</html>

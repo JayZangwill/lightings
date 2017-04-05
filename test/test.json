@@ -1,11 +1,7 @@
 {
-	"title":{
-		"name":{
-			"first":"1",
-			"last":"21",
-			"a":"3"
-		}
-	},
-	"friends":[1,3,3,4],
-	"aaa":1
+	"name": "Lightings",
+	"author": {
+			"firstName": "Jay",
+			"lastName": "Zangwill"
+	}
 }

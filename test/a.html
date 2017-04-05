@@ -8,20 +8,28 @@
 
 	<body>
 		<div id="app">
-			<p>大</p>
-		</div>
+		<p>{{name}}</p>
+		<p>{{author.firstName}} {{author.lastName}}</p>
+	</div>
 		<!--<script src="../dist/lightings.min.js"></script>-->
 		<script src="../dist/lightings.js"></script>
 		<script>
-			var a = Lightings({
-//								url: "http://s.weibo.com/ajax/jsonp/suggestion",
-				url: "test.json",
-//								data: "key=刘国梁",
-//								callbackName: "_cb",
-				success: function(data) {
-					console.log(data);
-				}
-			});
+//			var a = Lightings({
+////								url: "http://s.weibo.com/ajax/jsonp/suggestion",
+//				url: "test.json",
+////								data: "key=刘国梁",
+////								callbackName: "_cb",
+//				success: function(data) {
+//					console.log(data);
+//				}
+//			});
+Lightings({
+		el:"#app",
+		url:"test.json",
+		success:function(data){
+			//other operations
+		}
+	})
 		</script>
 	</body>
 

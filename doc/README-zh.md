@@ -10,19 +10,19 @@
 
 ```
 	//test.json
-	{
-		'name': 'Lightings',
-		'author': {
-				'firstName': 'Jay',
-				'lastName': 'Zangwill'
-		}
+{
+	    "name": "Lightings",
+	    "author": {
+			"firstName": "Jay",
+			"lastName": "Zangwill"
 	}
+}
 ```
 
 ```
 	// get
 	Lightings({
-		#el:"#app",
+		el:"#app",
 		url:"test.json",
 		success:function(data){
 			//other operations
@@ -51,7 +51,7 @@
 ```
 	// post
 	Lightings({
-		#el:"#app",
+		el:"#app",
 		url:"test.json",
 		type:"post",
 		data:{

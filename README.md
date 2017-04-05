@@ -3,10 +3,10 @@
 
 A lightweight Ajax framework based on ES6 `Promise` support template rendering.
 
-## Fast use
+## Use guide
 
 1. install： `npm install lightings`
-2. use guide：
+2. use case(tip:The following case data unified use of the test.json file)：
 
 ```
 	//test.json

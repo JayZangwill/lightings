@@ -103,7 +103,7 @@ lightings.get('test.json',{
 ### 2017 3.15 v1.1.0
 
 1. Add `timeout` configuration item. (jsonp does not support timeout)
-3. Add `progress` configuration item. (jsonp does not support timeout)
+2. Add `progress` configuration item. (jsonp does not support timeout)
 
 ### 2017 3.27 v1.2.0
 
@@ -116,4 +116,4 @@ Fixed low browser `Promise` function
 
 ### 2017 4.7 v2.0.0
 
-modify lighting API, abolish some outdated configuration
+modify lightings API, abolish some outdated configuration

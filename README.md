@@ -103,7 +103,6 @@ lightings.get('test.json',{
 ### 2017 3.15 v1.1.0
 
 1. Add `timeout` configuration item. (jsonp does not support timeout)
-2. Add `start` configuration item. (jsonp does not support timeout)
 3. Add `progress` configuration item. (jsonp does not support timeout)
 
 ### 2017 3.27 v1.2.0

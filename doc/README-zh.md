@@ -16,7 +16,7 @@ npm install lightings
 		|
 		|---dist
 	     	     |---lightings.js (使用bable编译后的es5源码)
-		         |---lightings.min.js
+		     |---lightings.min.js
 		 
 **提示**：如果您的浏览器支持es6语法可直接使用 **src** 目录下的es6源码。
 

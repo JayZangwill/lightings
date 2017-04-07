@@ -1,344 +1,109 @@
 # Lightings
 [中文文档](https://github.com/JayZangwill/lightings/blob/master/doc/README-zh.md) | [English](https://github.com/JayZangwill/lightings/blob/master/README.md)
 
-一个基于es6 `Promise`的轻量级ajax框架支持模板渲染。
+一个基于es6 `Promise`的轻量级ajax框架，支持模板渲染。
 
-## 使用指南
+## 安装
 
-1. 安装： `npm install lightings`
-2. 使用案例(tip:以下案例数据统一使用test.json文件的)：
-
-```
-	//test.json
-{
-	    "name": "Lightings",
-	    "author": {
-			"firstName": "Jay",
-			"lastName": "Zangwill"
-	}
-}
-```
-
-```
-	// get
-	Lightings({
-		el:"#app",
-		url:"test.json",
-		success:function(data){
-			//other operations
-		}
-	})
-```
-
-```
-	<!-- html -->
-	<div id="app">
-		<p>{{name}}</p>
-		<p>{{author.firstName}} {{author.lastName}}</p>
-	</div>
-```
-
-```
-	// get
-	Lightings({
-		url:"test.json",
-		success:function(data){
-			//dom operations
-		}
-	})
-```
-
-```
-	// post
-	Lightings({
-		el:"#app",
-		url:"test.json",
-		type:"post",
-		data:{
-			name:"Lightings"
-		},
-		success:function(data){
-			//other operations
-		}
-	})
-```
-
-```
-	<!-- html -->
-	<div id="app">
-		<p>{{name}}</p>
-		<p>{{author.firstName}} {{author.lastName}}</p>
-	</div>
-```
-
-```
-	/jsonp
-	Lightings({
-		url:"test.json",
-		data:{
-			name:"Lightings"
-		},
-		dataType:"jsonp",
-		success:function(data){
-			//dom operations
-		}
-	})
-```
+npm install lightings
 
 ## 目录结构：
 
 	lightings
 		|---src
-		|    |---lightings.js (es6源码)
-		|    |---promise.js (低版本浏览器支持Promise)
+		|    |---lightings.js (es6 源码)
+		|    |---promise.js (让低版本浏览器支持 Promise)
 		|
 		|---dist
-	     	     |---lightings.js (使用bable编译后的源码es5)
-		     |---lightings.min.js
+	     	     |---lightings.js (使用bable编译后的es5源码)
+		         |---lightings.min.js
 		 
-**tip**如果您的浏览器支持es6语法可以直接用src目录里的es6源码。
+**提示**：如果您的浏览器支持es6语法可直接使用 **src** 目录下的es6源码。
 
-## 配置参数
+## 使用例子
 
-<table>
-	<tr>
-		<th>参数</th>
-		<th>说明</th>
-		<th>默认值</th>
-		<th>可能值</th>
-		<th>备注</th>
-	</tr>
-	<tr>
-		<td>
-			el
-		</td>
-		<td>
-			作为Lightings的挂载目标
-		</td>
-		<td>
-			undefined
-		</td>
-		<td>
-			由用户定义
-		</td>
-		<td>
-			jsonp暂不支持模板输出
-		</td>
-	</tr>
-	<tr>
-		<td>
-			url
-		</td>
-		<td>
-			请求数据的地址
-		</td>
-		<td>
-			undefined
-		</td>
-		<td>
-			由用户定义
-		</td>
-		<td>
-			必须
-		</td>
-	</tr>
-	<tr>
-		<td>
-			success
-		</td>
-		<td>
-			请求数据成功后调用的函数
-		</td>
-		<td>
-			undefined
-		</td>
-		<td>
-			由用户定义
-		</td>
-		<td>
-			必须
-		</td>
-	</tr>
-	<tr>
-		<td>
-			error
-		</td>
-		<td>
-			请求数据失败后调用的函数
-		</td>
-		<td>
-			undefined
-		</td>
-		<td>
-			由用户定义
-		</td>
-		<td>
-			视用户的情况而定
-		</td>
-	</tr>
-	<tr>
-		<td>
-			data
-		</td>
-		<td>
-			连同请求一起发送到后台的数据
-		</td>
-		<td>
-			undefined
-		</td>
-		<td>
-			由用户定义(可以传对象，例如:{dataKey:data})
-		</td>
-		<td>
-			非必须
-		</td>
-	</tr>
-	<tr>
-		<td>
-			type
-		</td>
-		<td>
-			请求的类型
-		</td>
-		<td>
-			get
-		</td>
-		<td>
-			get/post
-		</td>
-		<td>
-			非必须
-		</td>
-	</tr>
-	<tr>
-		<td>
-			dataType
-		</td>
-		<td>
-			数据返回的格式
-		</td>
-		<td>
-			json
-		</td>
-		<td>
-			json | jsonp | html | xml | text
-		</td>
-		<td>
-			非必须
-		</td>
-	</tr>
-	<tr>
-		<td>
-			contentType
-		</td>
-		<td>
-			请求头
-		</td>
-		<td>
-			"application/x-www-form-urlencoded; charset=UTF-8"
-		</td>
-		<td>
-			"application/x-www-form-urlencoded; charset=UTF-8" | 用户定义
-		</td>
-		<td>
-			非必须
-		</td>
-	</tr>
-	<tr>
-		<td>
-			async
-		</td>
-		<td>
-			是否异步请求
-		</td>
-		<td>
-			true
-		</td>
-		<td>
-			true | false
-		</td>
-		<td>
-			非必须
-		</td>
-	</tr>
-	<tr>
-		<td>
-			callbackName
-		</td>
-		<td>
-			设置dataType为jsonp时，服务端返回的回调函数名
-		</td>
-		<td>
-			callback
-		</td>
-		<td>
-			callback | 用户定义
-		</td>
-		<td>
-			dataTpye为jsonp时且服务端返回的回调函数名不为callback时必须
-		</td>
-	</tr>
-	<tr>
-		<td>
-			timeout
-		</td>
-		<td>
-			设置ajax的超时时长
-		</td>
-		<td>
-			0
-		</td>
-		<td>
-			 用户定义
-		</td>
-		<td>
-			jsonp暂时不支持timeout
-		</td>
-	</tr>
-	<tr>
-		<td>
-			start
-		</td>
-		<td>
-			设置ajax请求发送前的回调函数，相当于`onloadstart`
-		</td>
-		<td>
-			undefined
-		</td>
-		<td>
-			 用户定义
-		</td>
-		<td>
-			jsonp暂时不支持start
-		</td>
-	</tr>
-	<tr>
-		<td>
-			progress
-		</td>
-		<td>
-			设置ajax请求发中的回调函数，相当于`onprogress`
-		</td>
-		<td>
-			undefined
-		</td>
-		<td>
-			 用户定义
-		</td>
-		<td>
-			jsonp暂时不支持progress，且ie10一下浏览器不能用
-		</td>
-	</tr>
-</table>
+**提示**：例子的json数据统一使用：
+```
+{
+	"name": "Lightings",
+	"author": {
+		"firstName": "Jay",
+		"lastName": "Zangwill"
+	}
+}
+```
+执行get请求（使用模板渲染）
+```
+lightings.get('test.json',{
+	config: true,
+	el: '#app'
+}).then(function(data){
+		console.log(data);
+		//other operation
+}).catch(function(error){
+	console.log(error);
+});
+```
 
-**tip**如果设置了`dataType`为`jsonp`的话只支持`get`请求
+```
+<!-- html -->
+<div id="app">
+	<p>author: {{author.firstName}} {{author.lastName}}</p>
+	<p>name: {{name}}</p>
+</div>
+```
 
+执行get请求（不使用模板渲染）
+```
+lightings.get('test.json')
+	.then(function(data){
+		console.log(data);
+		//dom operation and other operation
+	}).catch(function(error){
+		console.log(error);
+	});
+```
+
+执行跨域请求
+```
+lightings.jsonp('http://jayzangwill.cn/test.json')
+	.then(function(data){
+		console.log(data);
+		//dom operation and other operation
+	}).catch(function(error){
+		console.log(error);
+	});
+```
+
+## lightings API
+**lightings.get(url[,data,[options]])**
+
+**lightings.post(url[,data,[options]])**
+
+**lightings.jsonp(url[,data,[options]])**
+
+**注意**：
+1. 当使用options作为第二个参数的时候需要传入一个`config:true`属性，例如：
+```
+lightings.get('test.json',{
+	config:true,
+	...
+});
+```
+
+2. jsonp不支持，模板渲染、`timeout`、`progress`
+
+## 参数options（可配置项）
+1. el：用于模板渲染时lightings的挂载元素。（仅在数据格式为json支持get、post）
+2. dataType：服务端数据的返回格式。默认为json，可选值：json，xml，html，text。
+3. async: 是否异步。默认异步。
+4. contentType： 请求头。（仅支持post请求）
+5. timeout： 超时时间。默认0。（即不设置超时）
+6. progress：在ajax发送请求过程中进行的函数。
 ## 更新日志
-
 ### 2017 3.15 v1.1.0
 
 1. 添加`timeout`配置项。(jsonp暂不支持timeout)
-2. 添加`start`配置项。(jsonp暂不支持timeout)
 3. 添加`progress`配置项。(jsonp暂不支持timeout)
 
 ### 2017 3.27 v1.2.0
@@ -349,3 +114,7 @@
 
 1. 修正在ie9下报错bug
 2. 支持模板渲染(jsonp暂不支持)
+
+### 2017 4.7 v2.0.0
+
+修改lighting api，废除一些过时的配置方式

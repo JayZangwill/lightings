@@ -1,89 +1,11 @@
 # Lightings
 [中文文档](https://github.com/JayZangwill/lightings/blob/master/doc/README-zh.md) | [English](https://github.com/JayZangwill/lightings/blob/master/README.md)
 
-A lightweight Ajax framework based on ES6 `Promise` support template rendering.
+A lightweight Ajax framework based on ES6 `Promise`, support for template rendering.
 
-## Use guide
+## Installing
 
-1. install： `npm install lightings`
-2. use case(tip:The following case data unified use of the test.json file)：
-
-```
-	//test.json
-{
-	    "name": "Lightings",
-	    "author": {
-			"firstName": "Jay",
-			"lastName": "Zangwill"
-	}
-}
-```
-
-```
-	// get
-	Lightings({
-		el:"#app",
-		url:"test.json",
-		success:function(data){
-			//other operations
-		}
-	})
-```
-
-```
-	<!-- html -->
-	<div id="app">
-		<p>{{name}}</p>
-		<p>{{author.firstName}} {{author.lastName}}</p>
-	</div>
-```
-
-```
-	// get
-	Lightings({
-		url:"test.json",
-		success:function(data){
-			//dom operations
-		}
-	})
-```
-
-```
-	// post
-	Lightings({
-		el:"#app",
-		url:"test.json",
-		type:"post",
-		data:{
-			name:"Lightings"
-		},
-		success:function(data){
-			//other operations
-		}
-	})
-```
-
-```
-	<!-- html -->
-	<div id="app">
-		<p>{{name}}</p>
-		<p>{{author.firstName}} {{author.lastName}}</p>
-	</div>
-```
-
-```
-	/jsonp
-	Lightings({
-		url:"test.json",
-		data:{
-			name:"Lightings"
-		},
-		dataType:"jsonp",
-		success:function(data){
-			//dom operations
-		}
-	})
-```
+ `npm install lightings`
 
 ## Directory structure：
 
@@ -94,261 +16,87 @@ A lightweight Ajax framework based on ES6 `Promise` support template rendering.
 		|
 		|---dist
 	     	     |---lightings.js (use bable compiler source code es5)
-		     |---lightings.min.js
+		         |---lightings.min.js
 		 
-**tip**If your browser supports ES6 syntax can be directly used in the **src** directory of the ES6 source code.
+**tip**:If your browser supports ES6 syntax can be directly used in the **src** directory of the ES6 source code.
 
-## Configuration parameter
+## Example
 
-<table>
-	<tr>
-		<th>parameter</th>
-		<th>explain</th>
-		<th>default value</th>
-		<th>possible value</th>
-		<th>remarks</th>
-	</tr>
-	<tr>
-		<td>
-			el
-		</td>
-		<td>
-			As Lightings mount target
-		</td>
-		<td>
-			undefined
-		</td>
-		<td>
-			user define
-		</td>
-		<td>
-			jsonp does not support template output
-		</td>
-	</tr>
-	<tr>
-		<td>
-			url
-		</td>
-		<td>
-			requested data address
-		</td>
-		<td>
-			undefined
-		</td>
-		<td>
-			user define
-		</td>
-		<td>
-			must
-		</td>
-	</tr>
-	<tr>
-		<td>
-			success
-		</td>
-		<td>
-			a function called after the request data is successful
-		</td>
-		<td>
-			undefined
-		</td>
-		<td>
-			user define
-		</td>
-		<td>
-			must
-		</td>
-	</tr>
-	<tr>
-		<td>
-			error
-		</td>
-		<td>
-			A function called after the request data failed
-		</td>
-		<td>
-			undefined
-		</td>
-		<td>
-			user define
-		</td>
-		<td>
-			depending on the user's situation
-		</td>
-	</tr>
-	<tr>
-		<td>
-			data
-		</td>
-		<td>
-			data sent to server
-		</td>
-		<td>
-			undefined
-		</td>
-		<td>
-			user define(objects can be passed, such as: {dataKey:data})
-		</td>
-		<td>
-			must not
-		</td>
-	</tr>
-	<tr>
-		<td>
-			type
-		</td>
-		<td>
-			request type
-		</td>
-		<td>
-			get
-		</td>
-		<td>
-			get/post
-		</td>
-		<td>
-			must not
-		</td>
-	</tr>
-	<tr>
-		<td>
-			dataType
-		</td>
-		<td>
-			data return format
-		</td>
-		<td>
-			json
-		</td>
-		<td>
-			json | jsonp | html | xml | text
-		</td>
-		<td>
-			must not
-		</td>
-	</tr>
-	<tr>
-		<td>
-			contentType
-		</td>
-		<td>
-			request header
-		</td>
-		<td>
-			"application/x-www-form-urlencoded; charset=UTF-8"
-		</td>
-		<td>
-			"application/x-www-form-urlencoded; charset=UTF-8" | user define
-		</td>
-		<td>
-			must not
-		</td>
-	</tr>
-	<tr>
-		<td>
-			async
-		</td>
-		<td>
-			asynchronous request
-		</td>
-		<td>
-			true
-		</td>
-		<td>
-			true | false
-		</td>
-		<td>
-			must not
-		</td>
-	</tr>
-	<tr>
-		<td>
-			callbackName
-		</td>
-		<td>
-			when dataType is set to jsonp, the callback function name returned by the server
-		</td>
-		<td>
-			callback
-		</td>
-		<td>
-			callback | user define
-		</td>
-		<td>
-			when dataTpye is jsonp and the callback function name returned by the server is not callback
-		</td>
-	</tr>
-	<tr>
-		<td>
-			timeout
-		</td>
-		<td>
-			set ajax timeout duration
-		</td>
-		<td>
-			0
-		</td>
-		<td>
-			 user define
-		</td>
-		<td>
-			jsonp temporarily does not support timeout
-		</td>
-	</tr>
-	<tr>
-		<td>
-			timeout
-		</td>
-		<td>
-			set ajax timeout duration
-		</td>
-		<td>
-			undefined
-		</td>
-		<td>
-			 user define
-		</td>
-		<td>
-			jsonp temporarily does not support timeout
-		</td>
-	</tr>
-	<tr>
-		<td>
-			start
-		</td>
-		<td>
-			set the callback function before the Ajax request is sent, equivalent to `onloadstart`
-		</td>
-		<td>
-			undefined
-		</td>
-		<td>
-			 user define
-		</td>
-		<td>
-			jsonp temporarily does not support start
-		</td>
-	</tr>
-	<tr>
-		<td>
-			progress
-		</td>
-		<td>
-			equivalent to `onprogress`
-		</td>
-		<td>
-			undefined
-		</td>
-		<td>
-			 user define
-		</td>
-		<td>
-			jsonp temporarily does not support progress and ie10 browser can not be used
-		</td>
-	</tr>
-</table>
+**tip**:Examples of uniform use of JSON data:
+```
+{
+	"name": "Lightings",
+	"author": {
+		"firstName": "Jay",
+		"lastName": "Zangwill"
+	}
+}
+```
+Performing a GET request(using template rendering)
+```
+lightings.get('test.json',{
+	config: true,
+	el: '#app'
+}).then(function(data){
+		console.log(data);
+		//other operation
+}).catch(function(error){
+	console.log(error);
+});
+```
 
-**tip**If the `dataType` is set to `jsonp`, only support the `get` request.
+```
+<!-- html -->
+<div id="app">
+	<p>author: {{author.firstName}} {{author.lastName}}</p>
+	<p>name: {{name}}</p>
+</div>
+```
+Performing a GET request(do not use template rendering)
+```
+lightings.get('test.json')
+	.then(function(data){
+		console.log(data);
+		//dom operation and other operation
+	}).catch(function(error){
+		console.log(error);
+	});
+```
+Cross domain request
+```
+lightings.jsonp('http://jayzangwill.cn/test.json')
+	.then(function(data){
+		console.log(data);
+		//dom operation and other operation
+	}).catch(function(error){
+		console.log(error);
+	});
+```
+
+## lightings API
+**lightings.get(url[,data,[options]])**
+
+**lightings.post(url[,data,[options]])**
+
+**lightings.jsonp(url[,data,[options]])**
+
+**NOTE**：
+1. When using options as the second argument, you need to pass a `config:true` property, such as
+```
+lightings.get('test.json',{
+	config:true,
+	...
+});
+```
+2. jsonp does not support template rendering, `timeout`, `progress`
+
+## parameter `options`（configurable item）
+1. el：lightings mount elements for template rendering.(Only in the data format for JSON support get, post)
+2. dataType：server data return format,default is JSON, optional value: JSON,XML, HTML, text.
+3. async: whether asynchronous.default asynchronous.
+4. contentType： request header.（only support post requests）
+5. timeout： timeout. default 0 (no timeout is set)
+6. progress：a function in the process of sending a request to the Ajax
 
 ## Update log
 
@@ -366,3 +114,7 @@ Fixed low browser `Promise` function
 
 1. Fixed a bug in IE9 under bug
 2. Support template rendering(jsonp does not support)
+
+### 2017 4.7 v2.0.0
+
+modify lighting API, abolish some outdated configuration

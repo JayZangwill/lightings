@@ -8,28 +8,22 @@
 
 	<body>
 		<div id="app">
-		<p>{{name}}</p>
-		<p>{{author.firstName}} {{author.lastName}}</p>
-	</div>
-		<!--<script src="../dist/lightings.min.js"></script>-->
-		<script src="../dist/lightings.js"></script>
+			<p>{{name}}</p>
+		</div>
+		<script src="../dist/lightings.min.js"></script>
 		<script>
-//			var a = Lightings({
-////								url: "http://s.weibo.com/ajax/jsonp/suggestion",
-//				url: "test.json",
-////								data: "key=刘国梁",
-////								callbackName: "_cb",
-//				success: function(data) {
-//					console.log(data);
-//				}
-//			});
-Lightings({
-		el:"#app",
-		url:"test.json",
-		success:function(data){
-			//other operations
-		}
-	})
+			lightings.get('test.json',{
+				config:true,
+				el:"#app",
+				start:function(e){
+					console.log(e);
+				}
+			}).then(function(data){
+				console.log(data);
+			})
+			lightings.jsonp('http://api.asilu.com/weather/').then(function(data){
+				console.log(data);
+			});
 		</script>
 	</body>
 

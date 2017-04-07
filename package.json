@@ -1,6 +1,6 @@
 {
   "name": "lightings",
-  "version": "1.3.1",
+  "version": "2.0.0",
   "description": "A lightweight Ajax Library",
   "keywords": [
     "lightweight",
@@ -17,9 +17,9 @@
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^2.1.0",
     "gulp-watch": "^4.3.11"
+  },
+  "license": "MIT",
+  "bugs": {
+	"url": "https://github.com/JayZangwill/lightings/issues"
   }
-},
-"license": "MIT",
-"bugs": {
-  "url": "https://github.com/JayZangwill/lightings/issues"
-},
+}

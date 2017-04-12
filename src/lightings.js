@@ -1,5 +1,5 @@
 /*!
- * Lightings v2.0.0
+ * Lightings v2.0.1
  * Copyright (c) 2017 Jay Zangwill
  */
 'use strict';
@@ -112,10 +112,10 @@
 							resolve(this.responseXML);
 						} else if(context.isIe9) {
 							resolve(JSON.parse(this.responseText));
-							echo.call(context, JSON.parse(this.responseText));
+							compile.call(context, JSON.parse(this.responseText));
 						} else {
 							resolve(this.response);
-							echo.call(context, this.response);
+							compile.call(context, this.response);
 						}
 						if(timer) {
 							clearTimeout(timer)
@@ -138,39 +138,50 @@
 	}
 
 	// 模板渲染
-	function echo(data) {
-		if(this.el && document.querySelectorAll(this.el)[0] && this.dataType === 'json') {
-			let dom = document.querySelectorAll(this.el)[0],
-				content = dom.innerHTML,
-				key,
-				variable = data,
-				result,
-				first = true,
-				brace = /{{(.+?)}}/g;
+	function compile(data) {
+		let dom = document.querySelector(this.el),
+			key,
+			variable = data,
+			result,
+			childs,
+			text,
+			first = true,
+			fragment = document.createDocumentFragment(),
+			brace = /{{(.+?)}}/g;
+
+		if(this.el && dom && this.dataType === 'json') {
 			if(typeof dom === 'undefined') {
 				throw Error(`Cannot find element: ${this.el}`);
 			}
 			if(dom.nodeName.toLowerCase() === 'body' || dom.nodeName.toLowerCase() === 'html') {
 				throw Error('Do not mount Lightings to <html> or <body> - mount to normal elements instead.');
 			}
-			while(brace.exec(content)) {
-				variable = data;
-				key = RegExp.$1.split('.');
-				key.forEach((item) => {
-					variable = variable[item];
-				});
+			while(dom.firstChild) {
+				fragment.appendChild(dom.firstChild);
+			}
+			childs = fragment.childNodes;
+			Array.prototype.slice.call(childs).forEach((node) => {
+				first = true;
+				result = '';
+				text = node.textContent;
+				while(brace.test(text)) {
+					variable = data;
+					key = RegExp.$1.trim().split('.');
+					key.forEach((item) => {
+						variable = variable[item];
+					});
 
-				// 让模板能正确解析
-				if(first) {
-					result = content.replace(/{{.+?}}/, variable);
-					first = false;
-				} else {
-					result = result.replace(/{{.+?}}/, variable);
+					// 让模板能正确解析
+					if(first) {
+						result = text.replace(/{{.+?}}/, variable);
+						first = false;
+					} else {
+						result = result.replace(/{{.+?}}/, variable);
+					}
 				}
-			}
-			if(result) {
-				dom.innerHTML = result;
-			}
+				node.textContent = result;
+			});
+			dom.appendChild(fragment);
 		}
 	}
 	window.lightings = new Lightings();

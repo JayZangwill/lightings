@@ -1,5 +1,5 @@
 /*!
- * Lightings v2.0.0
+ * Lightings v2.0.1
  * Copyright (c) 2017 Jay Zangwill
  */
 'use strict';
@@ -114,10 +114,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 							resolve(this.responseXML);
 						} else if (context.isIe9) {
 							resolve(JSON.parse(this.responseText));
-							echo.call(context, JSON.parse(this.responseText));
+							compile.call(context, JSON.parse(this.responseText));
 						} else {
 							resolve(this.response);
-							echo.call(context, this.response);
+							compile.call(context, this.response);
 						}
 						if (timer) {
 							clearTimeout(timer);
@@ -140,43 +140,50 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 	}
 
 	// 模板渲染
-	function echo(data) {
-		var _this = this;
+	function compile(data) {
+		var dom = document.querySelector(this.el),
+		    key = void 0,
+		    variable = data,
+		    result = void 0,
+		    childs = void 0,
+		    text = void 0,
+		    first = true,
+		    fragment = document.createDocumentFragment(),
+		    brace = /{{(.+?)}}/g;
 
-		if (this.el && document.querySelectorAll(this.el)[0] && this.dataType === 'json') {
-			(function () {
-				var dom = document.querySelectorAll(_this.el)[0],
-				    content = dom.innerHTML,
-				    key = void 0,
-				    variable = data,
-				    result = void 0,
-				    first = true,
-				    brace = /{{(.+?)}}/g;
-				if (typeof dom === 'undefined') {
-					throw Error('Cannot find element: ' + _this.el);
-				}
-				if (dom.nodeName.toLowerCase() === 'body' || dom.nodeName.toLowerCase() === 'html') {
-					throw Error('Do not mount Lightings to <html> or <body> - mount to normal elements instead.');
-				}
-				while (brace.exec(content)) {
+		if (this.el && dom && this.dataType === 'json') {
+			if (typeof dom === 'undefined') {
+				throw Error('Cannot find element: ' + this.el);
+			}
+			if (dom.nodeName.toLowerCase() === 'body' || dom.nodeName.toLowerCase() === 'html') {
+				throw Error('Do not mount Lightings to <html> or <body> - mount to normal elements instead.');
+			}
+			while (dom.firstChild) {
+				fragment.appendChild(dom.firstChild);
+			}
+			childs = fragment.childNodes;
+			Array.prototype.slice.call(childs).forEach(function (node) {
+				first = true;
+				result = '';
+				text = node.textContent;
+				while (brace.test(text)) {
 					variable = data;
-					key = RegExp.$1.split('.');
+					key = RegExp.$1.trim().split('.');
 					key.forEach(function (item) {
 						variable = variable[item];
 					});
 
 					// 让模板能正确解析
 					if (first) {
-						result = content.replace(/{{.+?}}/, variable);
+						result = text.replace(/{{.+?}}/, variable);
 						first = false;
 					} else {
 						result = result.replace(/{{.+?}}/, variable);
 					}
 				}
-				if (result) {
-					dom.innerHTML = result;
-				}
-			})();
+				node.textContent = result;
+			});
+			dom.appendChild(fragment);
 		}
 	}
 	window.lightings = new Lightings();

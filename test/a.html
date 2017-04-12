@@ -8,22 +8,18 @@
 
 	<body>
 		<div id="app">
+			{{author.firstName}}
 			<p>{{name}}</p>
+			{{  author.lastName }}
 		</div>
 		<script src="../dist/lightings.min.js"></script>
 		<script>
 			lightings.get('test.json',{
 				config:true,
-				el:"#app",
-				start:function(e){
-					console.log(e);
-				}
-			}).then(function(data){
+				el:"#app"
+			}).then(function(data) {
 				console.log(data);
 			})
-			lightings.jsonp('http://api.asilu.com/weather/').then(function(data){
-				console.log(data);
-			});
 		</script>
 	</body>
 

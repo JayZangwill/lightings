@@ -117,3 +117,7 @@ Fixed low browser `Promise` function
 ### 2017 4.7 v2.0.0
 
 modify lightings API, abolish some outdated configuration
+
+### 2017 4.7 v2.0.1
+
+optimized template rendering

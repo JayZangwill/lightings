@@ -7,19 +7,20 @@
 	</head>
 
 	<body>
-		<div id="app">
+		<!--<div id="app">
 			{{author.firstName}}
 			<p>{{name}}</p>
 			{{  author.lastName }}
-		</div>
+		</div>-->
 		<script src="../dist/lightings.min.js"></script>
 		<script>
-			lightings.get('test.json',{
+			lightings.get('test.xml',{
 				config:true,
-				el:"#app"
+				el:"#app",
+				dataType:'xml'
 			}).then(function(data) {
 				console.log(data);
-			})
+			});
 		</script>
 	</body>
 

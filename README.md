@@ -121,3 +121,8 @@ modify lightings API, abolish some outdated configuration
 ### 2017 4.7 v2.0.1
 
 optimized template rendering
+
+### 2017 4.13 v2.0.2
+
+1. Fixed issue where async could not be set to false
+2. Fixed issue with false unable to get data when set to Async

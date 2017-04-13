@@ -1,5 +1,5 @@
 /*!
- * Lightings v2.0.1
+ * Lightings v2.0.2
  * Copyright (c) 2017 Jay Zangwill
  */
 'use strict';
@@ -77,9 +77,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 			return;
 		}
 		this.el = options && options.el;
-		//this.flag用于判断是不是xml
+
+		// this.flag用于判断是不是xml
 		this.flag = this.dataType = options && options.dataType || 'json';
-		this.async = options && options.async === false || true;
+		this.async = options && options.async === false ? false : true;
 		this.contentType = options && options.contentType || 'application/x-www-form-urlencoded; charset=UTF-8';
 		this.timeout = options && options.timeout || 0;
 		this.progress = options && options.progress;
@@ -92,29 +93,25 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 		var timer = void 0;
 
 		return new Promise(function (resolve, reject) {
-			context.xhr.responseType = context.dataType.toLowerCase();
-			if (method === 'get') {
-				//如果是get请求，如果有数据，则吧数据添加在连接上发送到服务端
-				var url = context.url;
-				if (context.data) {
-					url += '?' + context.data;
-				}
-				context.xhr.open(method, url, context.async);
-				context.xhr.send(null);
-			} else if (method === 'post') {
-				//如果是post请求需要设置请求头，并且把数据作为send的参数
-				context.xhr.open(method, context.url, context.async);
-				context.xhr.setRequestHeader('Content-type', context.contentType);
-				context.xhr.send(context.data);
+
+			// 如果是同步请求就不能设置响应数据的类型
+			if (context.async) {
+				context.xhr.responseType = context.dataType.toLowerCase();
 			}
 			context.xhr.onreadystatechange = function () {
 				if (this.readyState === 4) {
 					if (this.status >= 200 && this.status < 300 || this.status === 304) {
 						if (context.flag === 'xml') {
 							resolve(this.responseXML);
-						} else if (context.isIe9) {
-							resolve(JSON.parse(this.responseText));
-							compile.call(context, JSON.parse(this.responseText));
+						} else if (context.isIe9 || !context.async) {
+
+							// 因为设置为同步不能设置响应数据的类型，所以要在这排错
+							try {
+								resolve(JSON.parse(this.responseText));
+								compile.call(context, JSON.parse(this.responseText));
+							} catch (e) {
+								resolve(this.responseText);
+							}
 						} else {
 							resolve(this.response);
 							compile.call(context, this.response);
@@ -127,6 +124,22 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 					}
 				}
 			};
+			if (method === 'get') {
+
+				// 如果是get请求，如果有数据，则吧数据添加在连接上发送到服务端
+				var url = context.url;
+				if (context.data) {
+					url += '?' + context.data;
+				}
+				context.xhr.open(method, url, context.async);
+				context.xhr.send(null);
+			} else if (method === 'post') {
+
+				// 如果是post请求需要设置请求头，并且把数据作为send的参数
+				context.xhr.open(method, context.url, context.async);
+				context.xhr.setRequestHeader('Content-type', context.contentType);
+				context.xhr.send(context.data);
+			}
 			if (context.async && context.timeout > 0) {
 				timer = setTimeout(function () {
 					context.xhr.abort();
@@ -143,7 +156,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 	function compile(data) {
 		var dom = document.querySelector(this.el),
 		    key = void 0,
-		    variable = data,
+		    variable = void 0,
 		    result = void 0,
 		    childs = void 0,
 		    text = void 0,

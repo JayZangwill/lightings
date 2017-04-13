@@ -122,3 +122,8 @@ lightings.get('test.json',{
 ### 2017 4.7 v2.0.1
 
 优化模板渲染
+
+### 2017 4.13 v2.0.2
+
+1. 修正async无法设置为false的问题
+2. 修正async设置为false时无法获取数据的问题

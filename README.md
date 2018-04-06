@@ -126,3 +126,6 @@ optimized template rendering
 
 1. Fixed issue where async could not be set to false
 2. Fixed issue with false unable to get data when set to Async
+
+### 2018 4.06 V2.0.3
+1. Fixe some bug

@@ -30,8 +30,10 @@
 						`${self.url}?${self.callbackName}=Lightings${random}&${self.data}` :
 						`${self.url}?${self.callbackName}=Lightings${random}`;
 					document.body.appendChild(script);
-					window['Lightings' + random] = resolve;
-					document.body.removeChild(script);
+					script.onload = function() {
+						window['Lightings' + random] = resolve;
+						document.body.removeChild(script);
+					}
 				} catch(e) {
 					reject(e);
 				}

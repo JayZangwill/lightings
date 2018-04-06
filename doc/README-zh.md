@@ -127,3 +127,6 @@ lightings.get('test.json',{
 
 1. 修正async无法设置为false的问题
 2. 修正async设置为false时无法获取数据的问题
+
+### 2018 4.06 V2.0.3
+1. 修正一些bug

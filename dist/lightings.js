@@ -31,10 +31,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 					random = random.replace(/0\./g, '_');
 					script.src = self.data ? self.url + '?' + self.callbackName + '=Lightings' + random + '&' + self.data : self.url + '?' + self.callbackName + '=Lightings' + random;
 					document.body.appendChild(script);
-					script.onload = function () {
-						window['Lightings' + random] = resolve;
-						document.body.removeChild(script);
-					};
+					window['Lightings' + random] = resolve;
+					// 因为script的下载和执行会阻塞主线程，所以下载完成获得数据后同步清除标签即可
+					document.body.removeChild(script);
 				} catch (e) {
 					reject(e);
 				}
